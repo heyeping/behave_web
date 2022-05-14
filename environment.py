@@ -10,13 +10,16 @@ import time
 import os
 import shutil
 
+from base.driver_init import driverInit
+from page.baidu_page import BaiduPage
+
+
 def before_scenario(context, feature):
-    context.driver = webdriver.Chrome()
-    context.driver.implicitly_wait(10)
-    context.driver.maximize_window()
-    time.sleep(1)
+    context.drivers = driverInit(index=2)
+
+    context.BaiduPage = BaiduPage()
 
 
 def after_scenario(context, feature):
-    context.driver.quit()
+    context.drivers.quits()
 
